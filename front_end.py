@@ -3,6 +3,23 @@
 # print(val)
 
 acc_type = "test"
+valid_acc = 1234567
+
+def deposit():
+    while True:
+        acc_num = input("Enter in 7-digit account number: \n")
+        #if isinstance(acc_num, int) and len(str(acc_num)) == 7 and acc_num == valid_acc:
+        if isinstance(acc_num, str) == True:
+
+            print("Yayy")
+            # if acc_num == valid_acc:
+            #     deposit_value = input("Enter in how much you want to deposit: \n")
+                # if deposit_value  == isinstance(deposit_value,int) and deposit_value == (size(deposit_value)> 3) and deposit_value == (size(deposit_value)> 8)
+            #
+        else:
+            print("Enter valid account number please!")
+
+
 
 def get_Acc_Type():
     while True:
@@ -44,6 +61,7 @@ while True:
                  #   print ("It worked")
                 if transaction_type == "deposit":
                     print("Go to deposit function")
+                    deposit()
 
                 if transaction_type == "withdraw":
                     print("Go to withdraw function")
