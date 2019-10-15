@@ -2,6 +2,8 @@
 # val = input("Enter your value: \n")
 # print(val)
 
+import sys
+
 acc_type = "test"
 valid_acc = 1234567
 
@@ -46,7 +48,7 @@ def get_Acc_Type():
 print("Welcome to the 327 Front End")
 # Looping Sessions
 while True:
-    login_valid = input('Please enter "login" to login to Quinterac: \n')
+    login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program: \n')
     if login_valid == "login":
         # continue
         print("Login successful")
@@ -86,6 +88,8 @@ while True:
 
 
         print("Transaction Complete \n \n")
+    if login_valid == "exit":
+        sys.exit()
     else: # if user did not enter login
         print("** ERROR ** Login not valid, please enter valid input")
 
