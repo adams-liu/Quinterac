@@ -3,51 +3,99 @@
 # print(val)
 
 acc_type = "test"
-valid_acc = 1234567
+valid_acc = '1234567'
 
-def deposit():
+# def deposit():
+#     while True:
+#         acc_num = input("Enter in 7-digit account number: \n")
+#         #if isinstance(acc_num, int) and len(str(acc_num)) == 7 and acc_num == valid_acc:
+#         if isinstance(acc_num, str) == True:
+#
+#             print("Yayy")
+#             # if acc_num == valid_acc:
+#             #     deposit_value = input("Enter in how much you want to deposit: \n")
+#                 # if deposit_value  == isinstance(deposit_value,int) and deposit_value == (size(deposit_value)> 3) and deposit_value == (size(deposit_value)> 8)
+#             #
+#         else:
+#             print("Enter valid account number please!")
+
+
+def deleteacct():
     while True:
         acc_num = input("Enter in 7-digit account number: \n")
-        #if isinstance(acc_num, int) and len(str(acc_num)) == 7 and acc_num == valid_acc:
-        if isinstance(acc_num, str) == True:
-
-            print("Yayy")
-            # if acc_num == valid_acc:
-            #     deposit_value = input("Enter in how much you want to deposit: \n")
-                # if deposit_value  == isinstance(deposit_value,int) and deposit_value == (size(deposit_value)> 3) and deposit_value == (size(deposit_value)> 8)
-            #
-        else:
-            print("Enter valid account number please!")
-
-
-def createact():
-    while True:
-        acc_num = input("Enter in 7-digit account number: \n")
-        if isint(acc_num) == True:
-            if valid_acc(acc_num) == True:
-                name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
-                if is_alpha_num(name) == True:
-                    print("works")
-                elif is_alpha_num(name) != True:
-                    print("Error! Enter a")
-
-        elif istint(acc_num) != True:
+        # Check if account number is int
+        if is_int(acc_num) == True:
+            # Check if account number is on valid account list
+            if acc_num == valid_acc:
+                while True:
+                    name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
+                    # Check if name entered is alphanumeric
+                    if is_alpha_num(name) == True:
+                        if len(name) >= 3 and len(name) < 31:
+                            print("Account Successfully Deleted")
+                            return True
+                        else:
+                            print("Error! Account name must be between 3-30 characters. \n")
+                    elif is_alpha_num(name) != True:
+                        print("Error! Please enter in alphanumeric characters. \n ")
+            else:
+                 print("Error! Please enter a valid account number. \n")
+        elif is_int(acc_num) != True:
             print("Error! Enter in a 7-digit account number.")
+
+
+def createacct():
+    while True:
+        acc_num = input("Enter in 7-digit account number: \n")
+        # Check if account number is int
+        if is_int(acc_num) == True:
+            # Check if account number length 7
+            if acc_num == valid_acc:
+                if len(acc_num) == 7:
+                    while True:
+                        name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
+                        # Check if name entered is alphanumeric
+                        if is_alpha_num(name) == True:
+                            if len(name) >= 3 and len(name) < 31:
+                                print('Accounts Successfully Created')
+                                return True
+                            else:
+                                print("Error! Account name must be between 3-30 characters. \n")
+                        elif is_alpha_num(name) != True:
+                            print("Error! Please enter in alphanumeric characters. \n ")
+                else:
+                     print("Error! Please enter an account number with 7 digits. \n")
+            else:
+                 print("Error! Please enter a valid account number. \n")
+        elif is_int(acc_num) != True:
+            print("Error! Enter in a 7-digit account number. \n")
+
 
 def is_valid_acc(acc):
     for i in range(len(valid_acc)):
         if acc == valid_acc(i):
             return True
 
-def is_alpha_num(n):
+def is_int(acc):
+    n = [ord(j) for j in acc]
     for i in range(len(n)):
-        #  47 < x < 57,  64 < x < 91, 97 < x < 123
-        if 47 < n[i] < 57 or 64 < n[i] < 91 or 96 < n[i] < 123:
+        #  47 < x < 57
+        if 47 < n[i] <= 57:
             pass
         else:
             return False
     return True
 
+
+def is_alpha_num(k):
+    n = [ord(j) for j in k]
+    for i in range(len(n)):
+        #  47 < x < 57,  64 < x < 91, 97 < x < 123
+        if 47 < n[i] <= 57 or 64 < n[i] < 91 or 96 < n[i] < 123:
+            pass
+        else:
+            return False
+    return True
 
 
 def get_Acc_Type():
@@ -98,12 +146,14 @@ while True:
                     print("Go to transfer function")
                 if transaction_type == "createacct":
                     if acc_type == "agent":
-                        print("Go to create account function")
+                        #print("Go to create account function")
+                        createacct()
                     else:
                         print("You're not agent account type!")
                 if transaction_type == "deleteacct":
                     if acc_type == "agent":
-                        print("Go to delete account function")
+                        deleteacct()
+                        #print("Go to delete account function")
                     else:
                         print("You're not agent account type!")
                 if transaction_type == "logout":
@@ -111,7 +161,6 @@ while True:
                     break
             else:
                 print("Not a valid transaction")
-
 
 
         print("Transaction Complete \n \n")
