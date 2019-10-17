@@ -113,6 +113,7 @@ def createacct():
                        if is_alpha_num(name) == True:
                            if len(name) >= 3 and len(name) < 31:
                                print('Accounts Successfully Created')
+
                                return True
                            else:
                                print("Error! Account name must be between 3-30 characters. \n")
@@ -165,11 +166,12 @@ while True:
                     else:
                         print("You're not agent account type!")
                 if transaction_type == "logout":
-                    print("Go to logout function")
                     break
             else:
                 print("Not a valid transaction")
         print("Transaction Complete \n \n")
+        #Output a transaction summary file
+
     else: # if user did not enter login
         print("** ERROR ** Login not valid, please enter valid input")
 
