@@ -6,6 +6,36 @@ import sys
 
 acc_type = "test"
 valid_acc = 1234567
+valid_acc_list = []
+count = 0
+
+def print_accounts():
+    List_File = open("Account_List.txt", "r+")
+    for line in List_File:
+        valid_acc_list.append(line)
+    #for i in valid_acc_list:
+    print (valid_acc_list)
+
+def transfer():
+    while True:
+        acc_num = input("Enter in 7-digit account number to transfer from: \n")
+        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and int(acc_num) == valid_acc:
+            while True:
+                acc_num2 = input("Enter in 7-digit account number to transfer to: \n")
+                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and int(acc_num2) == valid_acc:
+                    while True:
+                        deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
+                        if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
+                            print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
+                            break;
+                        else:
+                            print("Enter valid monetary amount to transfer pelase!")
+                    break;
+                else:
+                    print("Enter valid account number please!")
+            break;
+        else:
+            print("Enter valid account number please!")
 
 def deposit():
     while True:
@@ -64,11 +94,11 @@ while True:
                 if transaction_type == "deposit":
                     print("Go to deposit function")
                     deposit()
-
                 if transaction_type == "withdraw":
                     print("Go to withdraw function")
                 if transaction_type == "transfer":
                     print("Go to transfer function")
+                    transfer()
                 if transaction_type == "createacct":
                     if acc_type == "agent":
                         print("Go to create account function")
@@ -88,8 +118,10 @@ while True:
 
 
         print("Transaction Complete \n \n")
-    if login_valid == "exit":
+    elif login_valid == "exit":
         sys.exit()
+    elif login_valid == "test":
+        print_accounts()
     else: # if user did not enter login
         print("** ERROR ** Login not valid, please enter valid input")
 
