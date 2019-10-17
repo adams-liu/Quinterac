@@ -20,6 +20,35 @@ def deposit():
             print("Enter valid account number please!")
 
 
+def createact():
+    while True:
+        acc_num = input("Enter in 7-digit account number: \n")
+        if isint(acc_num) == True:
+            if valid_acc(acc_num) == True:
+                name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
+                if is_alpha_num(name) == True:
+                    print("works")
+                elif is_alpha_num(name) != True:
+                    print("Error! Enter a")
+
+        elif istint(acc_num) != True:
+            print("Error! Enter in a 7-digit account number.")
+
+def is_valid_acc(acc):
+    for i in range(len(valid_acc)):
+        if acc == valid_acc(i):
+            return True
+
+def is_alpha_num(n):
+    for i in range(len(n)):
+        #  47 < x < 57,  64 < x < 91, 97 < x < 123
+        if 47 < n[i] < 57 or 64 < n[i] < 91 or 96 < n[i] < 123:
+            pass
+        else:
+            return False
+    return True
+
+
 
 def get_Acc_Type():
     while True:
