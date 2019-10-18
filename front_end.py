@@ -40,10 +40,10 @@ def print_accounts():
 def transfer():
     while True:
         acc_num = input("Enter in 7-digit account number to transfer from: \n")
-        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and int(acc_num) == valid_acc:
+        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and acc_num == valid_acc:
             while True:
                 acc_num2 = input("Enter in 7-digit account number to transfer to: \n")
-                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and int(acc_num2) == valid_acc:
+                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and acc_num2 == valid_acc:
                     while True:
                         deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
                         if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
