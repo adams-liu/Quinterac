@@ -15,7 +15,6 @@ def temp_to_TSF(list):
         file1.writelines(i)
 
 
-
 ## Check if input is fully numeric
 def is_int(n):
    k = [ord(i) for i in n]
