@@ -5,9 +5,12 @@
 import sys
 
 
-valid_acc = '1234567'
+acc_type = "test"
+valid_acc = "1234567"
+
 valid_acc_list = []
 count = 0
+tsf_temp = list()
 
 ## Check if input is fully numeric
 def is_int(n):
@@ -39,14 +42,18 @@ def print_accounts():
 def transfer():
     while True:
         acc_num = input("Enter in 7-digit account number to transfer from: \n")
-        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and int(acc_num) == valid_acc:
+        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and acc_num == valid_acc:
             while True:
                 acc_num2 = input("Enter in 7-digit account number to transfer to: \n")
-                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and int(acc_num2) == valid_acc:
+                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and acc_num2 == valid_acc:
                     while True:
                         deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
                         if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
                             print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
+
+                            tsf_temp.append("XFR "+ acc_num + " " + deposit_value + " " + acc_num2 + " " + "***")
+                            print(tsf_temp)
+
                             break
                         else:
                             print("Enter valid monetary amount to transfer please!")
@@ -72,6 +79,7 @@ def deposit():
                         if is_int(amount) == True:
                             if int(amount) < 99999999 or int(amount) > 0:
                                 print("You have successfully deposited: $", amount, "into your bank account")
+                                tsf_temp.append("DEP " + acc_num + " " + amount + " 0000000 "+"***")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
@@ -97,6 +105,7 @@ def withdraw():
                         if is_int(amount) == True:
                             if int(amount) < 99999999 and int(amount) > 0:
                                 print("You have successfully withdrawed:$",amount, "into your bank account")
+                                tsf_temp.append("WDR " + acc_num + " " + amount + " 0000000 "+"***")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
@@ -123,6 +132,7 @@ def deleteacct():
                    if is_alpha_num(name) == True:
                        if len(name) >= 3 and len(name) < 31:
                            print("Account successfully created")
+                           tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + "myAcc123")
                            return True
                        else:
                            print("Error! Account name must be between 3-30 characters. \n")
@@ -148,6 +158,7 @@ def createacct():
                        if is_alpha_num(name) == True:
                            if len(name) >= 3 and len(name) < 31:
                                print('Accounts Successfully Created')
+                               tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + "myAcc123")
                                return True
                            else:
                                print("Error! Account name must be between 3-30 characters. \n")
@@ -205,16 +216,17 @@ while True:
                     else:
                         print("You're not agent account type!")
                 if transaction_type == "logout":
-                    print("Go to logout function")
                     break
             else:
                 print("Not a valid transaction")
 
         print("Transaction Complete \n \n")
+
     elif login_valid == "exit":
         sys.exit()
     elif login_valid == "test":
         print_accounts()
+
     else: # if user did not enter login
         print("** ERROR ** Login not valid, please enter valid input")
 
