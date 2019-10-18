@@ -48,11 +48,11 @@ def transfer():
                         deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
                         if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
                             print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
-                            tsf_temp.append("XFR",acc_num,deposit_value,acc_num2)
+                            tsf_temp.append("XFR "+ acc_num + " " + deposit_value + " " + acc_num2 + " " + "***")
                             print(tsf_temp)
                             break
                         else:
-                            print("Enter valid monetary amount to transfer pelase!")
+                            print("Enter valid monetary amount to transfer please!")
                     break
                 else:
                     print("Enter valid account number please!")
@@ -71,7 +71,7 @@ def deposit():
                         if is_int(amount) == True:
                             if int(amount) < 99999999 or int(amount) > 0:
                                 print("You have successfully deposited: $", amount, "into your bank account")
-                                tsf_temp.append("DEP " + acc_num + amount + " 0000000 "+"***")
+                                tsf_temp.append("DEP " + acc_num + " " + amount + " 0000000 "+"***")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
@@ -96,6 +96,7 @@ def withdraw():
                         if is_int(amount) == True:
                             if int(amount) < 99999999 and int(amount) > 0:
                                 print("You have successfully withdrawed:$",amount, "into your bank account")
+                                tsf_temp.append("WDR " + acc_num + " " + amount + " 0000000 "+"***")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
@@ -122,6 +123,7 @@ def deleteacct():
                    if is_alpha_num(name) == True:
                        if len(name) >= 3 and len(name) < 31:
                            print("Account successfully created")
+                           tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + "myAcc123")
                            return True
                        else:
                            print("Error! Account name must be between 3-30 characters. \n")
@@ -147,7 +149,7 @@ def createacct():
                        if is_alpha_num(name) == True:
                            if len(name) >= 3 and len(name) < 31:
                                print('Accounts Successfully Created')
-
+                               tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + "myAcc123")
                                return True
                            else:
                                print("Error! Account name must be between 3-30 characters. \n")
