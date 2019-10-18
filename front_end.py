@@ -5,7 +5,7 @@
 import sys
 
 
-valid_acc = 1234567
+valid_acc = '1234567'
 valid_acc_list = []
 count = 0
 
@@ -47,14 +47,14 @@ def transfer():
                         deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
                         if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
                             print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
-                            break;
+                            break
                         else:
-                            print("Enter valid monetary amount to transfer pelase!")
-                    break;
+                            print("Enter valid monetary amount to transfer please!")
+                    break
                 else:
                     print("Enter valid account number please!")
-            break;
->>>>>>> origin
+            break
+
         else:
             return False
     return True
@@ -83,7 +83,7 @@ def deposit():
                 print("**ERROR** Your account number was not 7-digits")
         else:
             print("**ERROR** Your account number must be numerical")
->>>>>>> origin
+
 
 ## Withdraw Transaction
 def withdraw():
@@ -193,7 +193,7 @@ while True:
                 if transaction_type == "createacct":
                     if acc_type == "agent":
 
->>>>>>> origin
+
                         createacct()
                     else:
                         print("You're not agent account type!")
@@ -201,7 +201,7 @@ while True:
                     if acc_type == "agent":
                         deleteacct()
 
->>>>>>> origin
+
                     else:
                         print("You're not agent account type!")
                 if transaction_type == "logout":
@@ -210,7 +210,6 @@ while True:
             else:
                 print("Not a valid transaction")
 
->>>>>>> origin
         print("Transaction Complete \n \n")
     elif login_valid == "exit":
         sys.exit()
