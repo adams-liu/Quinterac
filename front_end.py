@@ -5,9 +5,10 @@
 import sys
 
 acc_type = "test"
-valid_acc = 1234567
+valid_acc = "1234567"
 valid_acc_list = []
 count = 0
+tsf_temp = list()
 
 ## Check if input is fully numeric
 def is_int(n):
@@ -47,13 +48,15 @@ def transfer():
                         deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
                         if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
                             print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
-                            break;
+                            tsf_temp.append("XFR",acc_num,deposit_value,acc_num2)
+                            print(tsf_temp)
+                            break
                         else:
                             print("Enter valid monetary amount to transfer pelase!")
-                    break;
+                    break
                 else:
                     print("Enter valid account number please!")
-            break;
+            break
         else:
             print("Enter valid account number please!")
 
@@ -68,6 +71,7 @@ def deposit():
                         if is_int(amount) == True:
                             if int(amount) < 99999999 or int(amount) > 0:
                                 print("You have successfully deposited: $", amount, "into your bank account")
+                                tsf_temp.append("DEP " + acc_num + amount + " 0000000 "+"***")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
