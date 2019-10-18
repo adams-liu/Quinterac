@@ -4,13 +4,21 @@
 
 import sys
 
-
+n = '7654321'
 acc_type = "test"
 valid_acc = "1234567"
 
 valid_acc_list = []
 count = 0
 tsf_temp = list()
+
+file1 = open("TSF.txt", 'w')
+
+def temp_to_TSF(list):
+    for i in list:
+        file1.writelines(i)
+    file1.close()
+
 
 ## Check if input is fully numeric
 def is_int(n):
@@ -32,27 +40,33 @@ def is_alpha_num(k):
            return False
    return True
 
-def print_accounts():
-    List_File = open("Account_List.txt", "r+")
-    for line in List_File:
-        valid_acc_list.append(line)
-    #for i in valid_acc_list:
-    print (valid_acc_list)
+def check_valid_acc(n):
+    with open("Account_List.txt", "r+") as List_File:
+        lines = List_File.read().splitlines()
+       
+    for i in lines:
+
+        if n == i:
+            return True
+
+    return False
+
+
 
 def transfer():
     while True:
         acc_num = input("Enter in 7-digit account number to transfer from: \n")
-        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and acc_num == valid_acc:
+        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and check_valid_acc(acc_num):
             while True:
                 acc_num2 = input("Enter in 7-digit account number to transfer to: \n")
-                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and acc_num2 == valid_acc:
+                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and check_valid_acc(acc_num):
                     while True:
                         deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
                         if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
                             print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
 
-                            tsf_temp.append("XFR "+ acc_num + " " + deposit_value + " " + acc_num2 + " " + "***")
-                            print(tsf_temp)
+                            tsf_temp.append("XFR "+ acc_num + " " + deposit_value + " " + acc_num2 + " " + '*** \n')
+
 
                             break
                         else:
@@ -73,13 +87,13 @@ def deposit():
         acc_num = input("Please enter in 7-digit account number: \n")
         if is_int(acc_num) == True:
             if len(str(acc_num)) == 7:
-                if acc_num == valid_acc: #replace the valid_acc with excel
+                if check_valid_acc(acc_num) == True: #replace the valid_acc with excel
                     while True:
                         amount = input("Enter how much you want to deposit: \n")
                         if is_int(amount) == True:
                             if int(amount) < 99999999 or int(amount) > 0:
                                 print("You have successfully deposited: $", amount, "into your bank account")
-                                tsf_temp.append("DEP " + acc_num + " " + amount + " 0000000 "+"***")
+                                tsf_temp.append("DEP " + acc_num + " " + amount + " 0000000 "+"*** \n")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
@@ -99,13 +113,13 @@ def withdraw():
         acc_num = input("Please enter in 7-digit account number: \n")
         if is_int(acc_num) == True:
             if len(str(acc_num)) == 7:
-                if acc_num == str(valid_acc): #replace the valid_acc with excel
+                if check_valid_acc(acc_num) == True: #replace the valid_acc with excel
                     while True:
                         amount = input("Enter how much you want to withdraw: \n")
                         if is_int(amount) == True:
                             if int(amount) < 99999999 and int(amount) > 0:
                                 print("You have successfully withdrawed:$",amount, "into your bank account")
-                                tsf_temp.append("WDR " + acc_num + " " + amount + " 0000000 "+"***")
+                                tsf_temp.append("WDR " + acc_num + " " + amount + " 0000000 "+"*** \n")
                                 return True
                             else:
                                 print("**ERROR** You please enter a range between 0 - 99999999")
@@ -125,14 +139,14 @@ def deleteacct():
        # Check if account number is int
        if is_int(acc_num) == True:
            # Check if account number is on valid account list
-           if acc_num == valid_acc:
+           if check_valid_acc(acc_num) == True:
                while True:
                    name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
                    # Check if name entered is alphanumeric
                    if is_alpha_num(name) == True:
                        if len(name) >= 3 and len(name) < 31:
                            print("Account successfully created")
-                           tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + "myAcc123")
+                           tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + name + ' \n')
                            return True
                        else:
                            print("Error! Account name must be between 3-30 characters. \n")
@@ -150,7 +164,7 @@ def createacct():
        # Check if account number is int
        if is_int(acc_num) == True:
            # Check if account number length 7
-           if acc_num != valid_acc:
+           if check_valid_acc(acc_num) == False:
                if len(acc_num) == 7:
                    while True:
                        name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
@@ -158,7 +172,7 @@ def createacct():
                        if is_alpha_num(name) == True:
                            if len(name) >= 3 and len(name) < 31:
                                print('Accounts Successfully Created')
-                               tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + "myAcc123")
+                               tsf_temp.append("NEW " + acc_num + " 000" + " 0000000 " + name + ' \n')
                                return True
                            else:
                                print("Error! Account name must be between 3-30 characters. \n")
@@ -216,6 +230,8 @@ while True:
                     else:
                         print("You're not agent account type!")
                 if transaction_type == "logout":
+                    tsf_temp.append("EOS " + '0000000' + " 000" + " 0000000 " + '***' + ' \n')
+                    temp_to_TSF(tsf_temp)
                     break
             else:
                 print("Not a valid transaction")
@@ -225,7 +241,8 @@ while True:
     elif login_valid == "exit":
         sys.exit()
     elif login_valid == "test":
-        print_accounts()
+
+        check_valid_acc(n)
 
     else: # if user did not enter login
         print("** ERROR ** Login not valid, please enter valid input")
