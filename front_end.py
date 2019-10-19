@@ -5,21 +5,11 @@ acc_type = ""
 ## Initialize empty lists for temporary transaction summary file.
 tsf_temp = []
 
-<<<<<<< HEAD
-
-
-## Create the Transaction Summary File named "TSF.txt" under variable name: file1
-infile = open("Account_List.txt", "r+")
-
-
-## Writes all contents of the temporary transaction summary file onto the actual transaction summary file saved as "TSF.txt"
-def temp_to_TSF(list):
-=======
 
 ## Writes all contents of the temporary transaction summary file onto the actual transaction summary file saved as "TSF.txt"
 def temp_to_TSF(list):
     ## Takes the transaction summary file: "TSF.txt" from the command line under variable name: outfile
->>>>>>> 24caad2ddd6aa7343fc08e29c2792c6c383decad
+
     outfile = open(sys.argv[2], 'w')
     for i in list:
         ## Add all contents of the list onto the actual transaction summary file
@@ -52,12 +42,10 @@ def is_alpha_num(input):
 
 ## Reads the valid account list file saved as "Account_List.txt" and tries to match each entry against the user input
 def check_valid_acc(acc_num):
-<<<<<<< HEAD
-    ## Open Account_List.txt from local directory
-=======
+
     ## Takes the valid account list file from the system command line
     infile = open(sys.argv[1], "r+")
->>>>>>> 24caad2ddd6aa7343fc08e29c2792c6c383decad
+
     lines = infile.read().splitlines()
     ## Loops through each entry of valid account list file
     for i in lines:
@@ -279,10 +267,8 @@ while True:
         print("Transaction Complete \n \n")
     ## Exit program when the user enters in exit
     elif login_valid == "exit":
-<<<<<<< HEAD
 
-=======
->>>>>>> 24caad2ddd6aa7343fc08e29c2792c6c383decad
+
         sys.exit()
 
     else: # if user did not enter login
