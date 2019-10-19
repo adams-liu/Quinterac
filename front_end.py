@@ -5,15 +5,15 @@ acc_type = ""
 ## Initialize empty lists for temporary transaction summary file.
 tsf_temp = []
 
-## Create the Transaction Summary File named "TSF.txt" under variable name: file1
-file1 = open("TSF.txt", 'w')
 
 ## Writes all contents of the temporary transaction summary file onto the actual transaction summary file saved as "TSF.txt"
 def temp_to_TSF(list):
+    ## Takes the transaction summary file: "TSF.txt" from the command line under variable name: outfile
+    outfile = open(sys.argv[2], 'w')
     for i in list:
         ## Add all contents of the list onto the actual transaction summary file
-        file1.writelines(i)
-
+        outfile.writelines(i)
+    outfile.close()
 
 ## Check if input is fully numeric
 def is_int(input):
@@ -41,9 +41,9 @@ def is_alpha_num(input):
 
 ## Reads the valid account list file saved as "Account_List.txt" and tries to match each entry against the user input
 def check_valid_acc(acc_num):
-    ## Open Account_List.txt from local directory
-    with open("Account_List.txt", "r+") as List_File:
-        lines = List_File.read().splitlines()
+    ## Takes the valid account list file from the system command line
+    infile = open(sys.argv[1], "r+")
+    lines = infile.read().splitlines()
     ## Loops through each entry of valid account list file
     for i in lines:
         ## Return True if there is a match with user input
@@ -220,6 +220,7 @@ print("Welcome to the 327 Front End")
 
 # Looping Sessions
 while True:
+
     login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program: \n')
     if login_valid == "login":
         ## Request the user's account type: either atm or agent
@@ -256,14 +257,13 @@ while True:
                     tsf_temp.append("EOS " + '0000000' + " 000" + " 0000000 " + '***' + ' \n')
                     ## add contents of the temporary transaction summary to the actual transaction summary file
                     temp_to_TSF(tsf_temp)
-                    break
+
             else: ## User did not enter a valid transaction
                 print("Not a valid transaction")
 
         print("Transaction Complete \n \n")
     ## Exit program when the user enters in exit
     elif login_valid == "exit":
-        file1.close()
         sys.exit()
 
     else: # if user did not enter login
