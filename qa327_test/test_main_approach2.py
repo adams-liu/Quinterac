@@ -3,7 +3,9 @@ from importlib import reload
 import os
 import io
 import sys
-import qa327.app as app
+
+#import front_end.front_end as app
+import front_end.app as app
 
 path = os.path.dirname(os.path.abspath(__file__))
 
@@ -15,6 +17,31 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
+    # helper(
+    #     capsys=capsys,
+    #     terminal_input=[
+    #         'login',
+    #         'atm',
+    #          'logout'
+    #         # #'exit'
+    #     ],
+    #     intput_valid_accounts=[
+    #         '1234567'
+    #     ],
+    #     expected_tail_of_terminal_output=[
+    #         'Welcome to the 327 Front End \n',
+    #          'Please enter "login" to login to Quinterac or "exit" to exit program: \n',
+    #          'Please login as atm or agent:\n',
+    #          'What would you like to do?\n - Deposit (deposit)\n - Withdraw (withdraw)\n - Transfer (transfer)\n',
+    #         '- Logout (logout)\n',
+    #         'Transaction Complete \n',
+    #         'Please enter "login" to login to Quinterac or "exit" to exit program: \n'
+    #
+    #     ],
+    #     expected_output_transactions=[
+    #          'EOS 0000000 000 0000000 ***'
+    #     ]
+    # )
     helper(
         capsys=capsys,
         terminal_input=[
@@ -29,8 +56,7 @@ def test_r2(capsys):
             'writing transactions...'],
         expected_output_transactions=[
             'hmm i am a transaction.'
-        ]
-    )
+        ])
 
 
 def helper(
@@ -82,9 +108,9 @@ def helper(
 
     # split terminal output in lines
     out_lines = out.splitlines()
-    
+
     # print out the testing information for debugging
-    # the following print content will only display if a 
+    # the following print content will only display if a
     # test case failed:
     print('std.in:', terminal_input)
     print('valid accounts:', intput_valid_accounts)
@@ -95,17 +121,17 @@ def helper(
     for i in range(1, len(expected_tail_of_terminal_output)+1):
         index = i * -1
         assert expected_tail_of_terminal_output[index] == out_lines[index]
-    
+
     # compare transactions:
     with open(transaction_summary_file, 'r') as of:
         content = of.read().splitlines()
-        
+
         # print out the testing information for debugging
-        # the following print content will only display if a 
+        # the following print content will only display if a
         # test case failed:
         print('output transactions:', content)
         print('output transactions (expected):', expected_output_transactions)
-        
+
         for ind in range(len(content)):
             assert content[ind] == expected_output_transactions[ind]
 
