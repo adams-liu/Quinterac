@@ -4,27 +4,51 @@ import os
 import io
 import sys
 
-#import front_end.front_end as app
-import qa327.app as app
+#import front_end.front_end as front_end
+import front_end.front_end as front_end
 
 path = os.path.dirname(os.path.abspath(__file__))
 
 
-def test_r2(capsys):
+def test_R6T1(capsys):
+
     helper(
         capsys=capsys,
         terminal_input=[
-            'login'
+            'login',
+            'atm',
+            'logout'
+
         ],
         intput_valid_accounts=[
             '123456'
         ],
         expected_tail_of_terminal_output=[
-            'here is the content',
-            '123456',
-            'writing transactions...'],
+
+           'Transaction Complete!'
+        ],
         expected_output_transactions=[
-            'hmm i am a transaction.'
+            'EOS 0000000 000 0000000 ***'
+        ])
+def test_r3(capsys):
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'logout'
+
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+           'Transaction Complete!'
+        ],
+        expected_output_transactions=[
+            'EOS 0000000 000 0000000 ***'
         ])
 
 
@@ -46,7 +70,7 @@ def helper(
     """
 
     # cleanup package
-    reload(app)
+    reload(front_end)
 
     # create a temporary file in the system to store output transactions
     temp_fd, temp_file = tempfile.mkstemp()
@@ -60,7 +84,7 @@ def helper(
 
     # prepare program parameters
     sys.argv = [
-        'app.py',
+        'front_end.py',
         valid_account_list_file,
         transaction_summary_file]
 
@@ -69,7 +93,7 @@ def helper(
         '\n'.join(terminal_input))
 
     # run the program
-    app.main()
+    front_end.main()
 
     # capture terminal output / errors
     # assuming that in this case we don't use stderr
@@ -89,7 +113,7 @@ def helper(
     # compare terminal outputs at the end.`
     for i in range(1, len(expected_tail_of_terminal_output)+1):
         index = i * -1
-        assert expected_tail_of_terminal_output[index] == out_lines[index]
+        assert expected_tail_of_terminal_output[index] == out_lines[index-1]
 
     # compare transactions:
     with open(transaction_summary_file, 'r') as of:
