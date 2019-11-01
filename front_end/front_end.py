@@ -270,7 +270,7 @@ def main():
                             break
 
                     else: ## User did not enter a valid transaction
-                        print("Not a valid transaction")
+                        print("** Error ** Not a valid transaction, please try again!")
             ## Exit program when the user enters in exit
             elif login_valid == "exit":
 

@@ -30,6 +30,159 @@ def test_R6T1(capsys):
         expected_output_transactions=[
             'EOS 0000000 000 0000000 ***'
         ])
+def test_R1T1(capsys):
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'logout'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+           "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R1T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'createacct'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R1T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'deleteacct'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R1T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'deposit'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R1T5(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'withdraw'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R1T6(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'transfer'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R1T7(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'asdfasdfjasdfj'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** ERROR ** Login not valid, please enter valid input"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R2 Test cases ####
+def test_R2T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'login'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** Error ** Not a valid transaction, please try again!"
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R2T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'asdfasdfasd'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+
+            "** Error ** Not a valid transaction, please try again!"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R3 Test cases ####
 def test_r3(capsys):
 
     helper(
