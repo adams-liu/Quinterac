@@ -18,10 +18,10 @@ def main():
     # R1:
     user_input = input('what is the key?\n')
     if(user_input == 'login'):
-        print('here is the content')
+        print('here is the content') #! Printing
         with open(valid_account_list_file) as rf:
-            print(rf.read())
-        print('writing transactions...')
+            print(rf.read()) #! Printing
+        print('writing transactions...') #! Printing
         with open(transaction_summary_file, 'w') as wf:
             wf.write('hmm i am a transaction.')
             # exit

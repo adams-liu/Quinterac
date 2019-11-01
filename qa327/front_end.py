@@ -1,5 +1,4 @@
 import sys
-import os
 
 ## Initialize global variable for account type.
 acc_type = ""
@@ -209,10 +208,8 @@ def createacct():
 
 ## Identifies whether or not account type is atm or agent
 def get_Acc_Type():
-
     while True:
-
-        # User enters in user type
+        ## User enters in user type
         acc_type = input("Please login as atm or agent:\n")
         ## Check if user input is valid
         if acc_type == "atm" or acc_type == "agent":
@@ -227,58 +224,54 @@ def main():
 
     # Looping Sessions
     while True:
-        try:
-            login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program: \n')
-            if login_valid == "login":
-                ## Request the user's account type: either atm or agent
-                acc_type = get_Acc_Type()
-                while True: # Looping Transactions
 
-                    print ("What would you like to do?\n - Deposit (deposit)\n - Withdraw (withdraw)\n - Transfer (transfer)")
-                    ## If user is of type agent, then create account and delete account transactions are also shown as options
-                    if acc_type == "agent":
-                        print (" - Create Account (createacct)\n - Delete Account (deleteacct)")
-                    ## Request user input, saved in the variable "transaction_type"
-                    transaction_type = input(" - Logout (logout) \n")
-                    ## Check if the user input matches any of the valid transactions
-                    if transaction_type == "deposit" or transaction_type == "withdraw" or transaction_type == "transfer" or transaction_type == "createacct" or transaction_type == "deleteacct" or transaction_type == "logout":
-                        if transaction_type == "deposit":
+        login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program: \n')
+        if login_valid == "login":
+            ## Request the user's account type: either atm or agent
+            acc_type = get_Acc_Type()
+            while True: # Looping Transactions
+                print ("What would you like to do?\n - Deposit (deposit)\n - Withdraw (withdraw)\n - Transfer (transfer)")
+                ## If user is of type agent, then create account and delete account transactions are also shown as options
+                if acc_type == "agent":
+                    print (" - Create Account (createacct)\n - Delete Account (deleteacct)")
+                ## Request user input, saved in the variable "transaction_type"
+                transaction_type = input(" - Logout (logout)\n")
+                ## Check if the user input matches any of the valid transactions
+                if transaction_type == "deposit" or transaction_type == "withdraw" or transaction_type == "transfer" or transaction_type == "createacct" or transaction_type == "deleteacct" or transaction_type == "logout":
+                    if transaction_type == "deposit":
+                        deposit()
+                    if transaction_type == "withdraw":
+                        withdraw()
+                    if transaction_type == "transfer":
+                        transfer()
+                    if transaction_type == "createacct":
+                        ## If the user type is agent, then proceed to transaction
+                        if acc_type == "agent":
+                            createacct()
+                        else: ## Error when atm user tries to create account
+                            print("You're not agent account type!")
+                    if transaction_type == "deleteacct":
+                        ## If the user type is agent, then proceed to transaction
+                        if acc_type == "agent":
+                            deleteacct()
+                        else: ## Error when atm user tries to delete account
+                            print("You're not agent account type!")
+                    if transaction_type == "logout":
+                        ## Logout add EOS transaction to the end of the temporary transaction summary file
+                        tsf_temp.append("EOS " + '0000000' + " 000" + " 0000000 " + '***' + ' \n')
+                        ## add contents of the temporary transaction summary to the actual transaction summary file
+                        temp_to_TSF(tsf_temp)
+                        break
+                else: ## User did not enter a valid transaction
+                    print("Not a valid transaction")
 
-                            deposit()
-                        if transaction_type == "withdraw":
-                            withdraw()
-                        if transaction_type == "transfer":
-                            transfer()
-                        if transaction_type == "createacct":
-                            ## If the user type is agent, then proceed to transaction
-                            if acc_type == "agent":
-                                createacct()
-                            else: ## Error when atm user tries to create account
-                                print("You're not agent account type!")
-                        if transaction_type == "deleteacct":
-                            ## If the user type is agent, then proceed to transaction
-                            if acc_type == "agent":
-                                deleteacct()
-                            else: ## Error when atm user tries to delete account
-                                print("You're not agent account type!")
-                        if transaction_type == "logout":
-                            ## Logout add EOS transaction to the end of the temporary transaction summary file
-                            tsf_temp.append("EOS " + '0000000 ' + "000 " + "0000000 " + "***\n")
-                            ## add contents of the temporary transaction summary to the actual transaction summary file
-                            temp_to_TSF(tsf_temp)
-                            print("Transaction Complete!")
-                            break
+            print("Transaction Complete \n")
+        ## Exit program when the user enters in exit
+        elif login_valid == "exit":
 
-                    else: ## User did not enter a valid transaction
-                        print("Not a valid transaction")
-            ## Exit program when the user enters in exit
-            elif login_valid == "exit":
+            sys.exit()
 
-                sys.exit()
-
-            else: # if user did not enter login
-                print("** ERROR ** Login not valid, please enter valid input")
-        except:
-            break
+        else: # if user did not enter login
+            print("** ERROR ** Login not valid, please enter valid input")
 
 
