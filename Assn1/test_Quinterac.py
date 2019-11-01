@@ -21,5 +21,5 @@ def test_one():
 
 
 def test_two():
-    assert one(1) == 2
+    assert one(1) == 1
 
