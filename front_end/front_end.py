@@ -233,13 +233,12 @@ def main():
                 ## Request the user's account type: either atm or agent
                 acc_type = get_Acc_Type()
                 while True: # Looping Transactions
-
-                    print ("What would you like to do?\n - Deposit (deposit)\n - Withdraw (withdraw)\n - Transfer (transfer)")
+                    print ("What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer)", end =" ")
                     ## If user is of type agent, then create account and delete account transactions are also shown as options
                     if acc_type == "agent":
-                        print (" - Create Account (createacct)\n - Delete Account (deleteacct)")
+                        print (" |Create Account (createacct) | Delete Account (deleteacct)", end =" ")
                     ## Request user input, saved in the variable "transaction_type"
-                    transaction_type = input(" - Logout (logout) \n")
+                    transaction_type = input("| Logout (logout) \n")
                     ## Check if the user input matches any of the valid transactions
                     if transaction_type == "deposit" or transaction_type == "withdraw" or transaction_type == "transfer" or transaction_type == "createacct" or transaction_type == "deleteacct" or transaction_type == "logout":
                         if transaction_type == "deposit":
@@ -262,13 +261,13 @@ def main():
                             else: ## Error when atm user tries to delete account
                                 print("You're not agent account type!")
                         if transaction_type == "logout":
+                            print("Transaction Complete!")
                             ## Logout add EOS transaction to the end of the temporary transaction summary file
                             tsf_temp.append("EOS " + '0000000 ' + "000 " + "0000000 " + "***\n")
                             ## add contents of the temporary transaction summary to the actual transaction summary file
                             temp_to_TSF(tsf_temp)
                             print("Transaction Complete!")
                             break
-
                     else: ## User did not enter a valid transaction
                         print("** Error ** Not a valid transaction, please try again!")
             ## Exit program when the user enters in exit
@@ -280,5 +279,5 @@ def main():
                 print("** ERROR ** Login not valid, please enter valid input")
         except:
             break
-
+main()
 
