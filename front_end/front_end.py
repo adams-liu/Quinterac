@@ -217,7 +217,6 @@ def get_Acc_Type():
         ## Check if user input is valid
         if acc_type == "atm" or acc_type == "agent":
             return acc_type
-
         else: #user did not type atm or agent
             print("** ERROR ** User did not input valid account type")
 
@@ -228,17 +227,17 @@ def main():
     # Looping Sessions
     while True:
         try:
-            login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program: \n')
+            login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program:\n')
             if login_valid == "login":
                 ## Request the user's account type: either atm or agent
                 acc_type = get_Acc_Type()
                 while True: # Looping Transactions
-                    print ("What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer)", end =" ")
+                    print ("What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer)", end ="")
                     ## If user is of type agent, then create account and delete account transactions are also shown as options
                     if acc_type == "agent":
-                        print (" |Create Account (createacct) | Delete Account (deleteacct)", end =" ")
+                        print (" | Create Account (createacct) | Delete Account (deleteacct)", end ="")
                     ## Request user input, saved in the variable "transaction_type"
-                    transaction_type = input("| Logout (logout) \n")
+                    transaction_type = input(" | Logout (logout)\n")
                     ## Check if the user input matches any of the valid transactions
                     if transaction_type == "deposit" or transaction_type == "withdraw" or transaction_type == "transfer" or transaction_type == "createacct" or transaction_type == "deleteacct" or transaction_type == "logout":
                         if transaction_type == "deposit":

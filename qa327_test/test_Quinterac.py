@@ -18,14 +18,15 @@ def test_R6T1(capsys):
             'login',
             'atm',
             'logout'
-
         ],
         intput_valid_accounts=[
             '123456'
         ],
         expected_tail_of_terminal_output=[
 
-           'Transaction Complete!'
+           'Transaction Complete!',
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
+
         ],
         expected_output_transactions=[
             'EOS 0000000 000 0000000 ***'
@@ -42,7 +43,8 @@ def test_R1T1(capsys):
         ],
         expected_tail_of_terminal_output=[
 
-           "** ERROR ** Login not valid, please enter valid input"
+           "** ERROR ** Login not valid, please enter valid input",
+           'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -57,8 +59,8 @@ def test_R1T2(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** ERROR ** Login not valid, please enter valid input"
+            "** ERROR ** Login not valid, please enter valid input",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -73,8 +75,8 @@ def test_R1T3(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** ERROR ** Login not valid, please enter valid input"
+            "** ERROR ** Login not valid, please enter valid input",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -89,8 +91,8 @@ def test_R1T4(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** ERROR ** Login not valid, please enter valid input"
+            "** ERROR ** Login not valid, please enter valid input",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -105,8 +107,8 @@ def test_R1T5(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** ERROR ** Login not valid, please enter valid input"
+            "** ERROR ** Login not valid, please enter valid input",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -121,8 +123,8 @@ def test_R1T6(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** ERROR ** Login not valid, please enter valid input"
+            "** ERROR ** Login not valid, please enter valid input",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -137,8 +139,8 @@ def test_R1T7(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** ERROR ** Login not valid, please enter valid input"
+            "** ERROR ** Login not valid, please enter valid input",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
         ],
         expected_output_transactions=[
 
@@ -157,8 +159,8 @@ def test_R2T1(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** Error ** Not a valid transaction, please try again!"
+            "** Error ** Not a valid transaction, please try again!",
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Logout (logout)"
         ],
         expected_output_transactions=[
 
@@ -175,34 +177,70 @@ def test_R2T2(capsys):
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-            "** Error ** Not a valid transaction, please try again!"
+            "** Error ** Not a valid transaction, please try again!",
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Logout (logout)"
         ],
         expected_output_transactions=[
 
         ])
 
 #### R3 Test cases ####
-def test_r3(capsys):
-
+def test_R3T1(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
             'login',
-            'agent',
-            'logout'
-
+            'atm'
         ],
         intput_valid_accounts=[
             '123456'
         ],
         expected_tail_of_terminal_output=[
-
-           'Transaction Complete!'
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Logout (logout)"
         ],
         expected_output_transactions=[
-            'EOS 0000000 000 0000000 ***'
+
         ])
+def test_R3T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent'
+        ],
+        intput_valid_accounts=[
+            '123456'
+        ],
+        expected_tail_of_terminal_output=[
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Create Account (createacct) | Delete Account (deleteacct) | Logout (logout)"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R4 Test cases ####
+
+
+# def test_r3(capsys):
+#
+#     helper(
+#         capsys=capsys,
+#         terminal_input=[
+#             'login',
+#             'agent',
+#             'logout'
+#
+#         ],
+#         intput_valid_accounts=[
+#             '123456'
+#         ],
+#         expected_tail_of_terminal_output=[
+#
+#            'Transaction Complete!'
+#         ],
+#         expected_output_transactions=[
+#             'EOS 0000000 000 0000000 ***'
+#         ])
 
 
 def helper(
@@ -266,7 +304,7 @@ def helper(
     # compare terminal outputs at the end.`
     for i in range(1, len(expected_tail_of_terminal_output)+1):
         index = i * -1
-        assert expected_tail_of_terminal_output[index] == out_lines[index-1]
+        assert expected_tail_of_terminal_output[index] == out_lines[index]
 
     # compare transactions:
     with open(transaction_summary_file, 'r') as of:
