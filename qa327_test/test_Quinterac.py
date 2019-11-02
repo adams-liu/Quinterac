@@ -9,7 +9,7 @@ import front_end.front_end as front_end
 
 path = os.path.dirname(os.path.abspath(__file__))
 
-
+#### R6 Test Cases ####
 def test_R6T1(capsys):
 
     helper(
@@ -20,7 +20,7 @@ def test_R6T1(capsys):
             'logout'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
 
@@ -31,6 +31,29 @@ def test_R6T1(capsys):
         expected_output_transactions=[
             'EOS 0000000 000 0000000 ***'
         ])
+def test_R6T2(capsys):
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'logout'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+
+           'Transaction Complete!',
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
+
+        ],
+        expected_output_transactions=[
+            'EOS 0000000 000 0000000 ***'
+        ])
+
+#### R1 Test Cases ####
 def test_R1T1(capsys):
 
     helper(
@@ -39,7 +62,7 @@ def test_R1T1(capsys):
             'logout'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
 
@@ -56,7 +79,7 @@ def test_R1T2(capsys):
             'createacct'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** ERROR ** Login not valid, please enter valid input",
@@ -72,7 +95,7 @@ def test_R1T3(capsys):
             'deleteacct'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** ERROR ** Login not valid, please enter valid input",
@@ -88,7 +111,7 @@ def test_R1T4(capsys):
             'deposit'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** ERROR ** Login not valid, please enter valid input",
@@ -104,7 +127,7 @@ def test_R1T5(capsys):
             'withdraw'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** ERROR ** Login not valid, please enter valid input",
@@ -120,7 +143,7 @@ def test_R1T6(capsys):
             'transfer'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** ERROR ** Login not valid, please enter valid input",
@@ -136,7 +159,7 @@ def test_R1T7(capsys):
             'asdfasdfjasdfj'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** ERROR ** Login not valid, please enter valid input",
@@ -156,7 +179,7 @@ def test_R2T1(capsys):
             'login'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** Error ** Not a valid transaction, please try again!",
@@ -174,7 +197,7 @@ def test_R2T2(capsys):
             'asdfasdfasd'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "** Error ** Not a valid transaction, please try again!",
@@ -193,7 +216,7 @@ def test_R3T1(capsys):
             'atm'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Logout (logout)"
@@ -209,7 +232,7 @@ def test_R3T2(capsys):
             'agent'
         ],
         intput_valid_accounts=[
-            '123456'
+            
         ],
         expected_tail_of_terminal_output=[
             "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Create Account (createacct) | Delete Account (deleteacct) | Logout (logout)"
@@ -219,8 +242,185 @@ def test_R3T2(capsys):
         ])
 
 #### R4 Test cases ####
+def test_R4T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'deposit'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Please enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
 
+        ])
+def test_R4T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'withdraw'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Please enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
 
+        ])
+def test_R4T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'transfer'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Enter in 7-digit account number to transfer from: "
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R4T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'createacct'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "** Error ** You're not agent account type!",
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Logout (logout)"
+
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R4T5(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'deleteacct'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "** Error ** You're not agent account type!",
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Logout (logout)"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R5 Test cases ####
+def test_R5T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Enter in 7-digit account number: "
+
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R5T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Enter in 7-digit account number: "
+
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R5T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'deposit'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Please enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R5T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'withdraw'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Please enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+def test_R5T5(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'atm',
+            'transfer'
+        ],
+        intput_valid_accounts=[
+            
+        ],
+        expected_tail_of_terminal_output=[
+            "Enter in 7-digit account number to transfer from: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R6 Test cases ####
 # def test_r3(capsys):
 #
 #     helper(
@@ -232,7 +432,7 @@ def test_R3T2(capsys):
 #
 #         ],
 #         intput_valid_accounts=[
-#             '123456'
+#             
 #         ],
 #         expected_tail_of_terminal_output=[
 #

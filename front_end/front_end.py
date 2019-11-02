@@ -252,13 +252,13 @@ def main():
                             if acc_type == "agent":
                                 createacct()
                             else: ## Error when atm user tries to create account
-                                print("You're not agent account type!")
+                                print("** Error ** You're not agent account type!")
                         if transaction_type == "deleteacct":
                             ## If the user type is agent, then proceed to transaction
                             if acc_type == "agent":
                                 deleteacct()
                             else: ## Error when atm user tries to delete account
-                                print("You're not agent account type!")
+                                print("** Error ** You're not agent account type!")
                         if transaction_type == "logout":
                             print("Transaction Complete!")
                             ## Logout add EOS transaction to the end of the temporary transaction summary file
