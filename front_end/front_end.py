@@ -155,25 +155,33 @@ def deleteacct():
        acc_num = input("Enter in 7-digit account number: \n")
        # Check if user input are numbers
        if is_int(acc_num) == True:
-           # Check if account number is on valid account list
-           if check_valid_acc(acc_num) == True:
-               while True:
-                   name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
-                   # Check if name entered is alphanumeric
-                   if is_alpha_num(name) == True:
-                       if len(name) >= 3 and len(name) < 31:
-                           print("Account Successfully Deleted")
-                           ## Appending transaction code into the temporary transaction summary file
-                           tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + name + ' \n')
-                           return True
-                       else:
-                           print("**Error** Account name must be between 3-30 characters. \n")
-                   elif is_alpha_num(name) != True:
-                       print("**Error** Please enter in alphanumeric characters. \n ")
+           # Verifies account number does not start with 0
+           if acc_num[0] != '0':
+               # Check if account number is 7 digits
+               if len(acc_num) == 7:
+                   # Check if account number is on valid account list
+                   if check_valid_acc(acc_num) == True:
+                       while True:
+                           name = input("Please enter an account name with between 3 - 30 alphanumeric characters\n")
+                           # Check if name entered is alphanumeric
+                           if is_alpha_num(name) == True:
+                               if len(name) >= 3 and len(name) < 31:
+                                   print("Account Successfully Deleted")
+                                   ## Appending transaction code into the temporary transaction summary file
+                                   tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + name + ' \n')
+                                   return True
+                               else:
+                                   print("**ERROR** Account name must be between 3-30 characters")
+                           elif is_alpha_num(name) != True:
+                               print("**ERROR** Please enter in alphanumeric characters")
+                   else:
+                        print("**ERROR** Please enter a valid account number")
+               else:
+                   print("**ERROR** Your account number must only have 7 digits")
            else:
-                print("**Error** Please enter a valid account number. \n")
+               print("**ERROR** Your account number can not start with 0")
        else:
-           print("**Error** Enter in a 7-digit account number.")
+           print("**ERROR** Enter in a 7-digit account number")
 
 
 ## Create Account Transaction
@@ -184,28 +192,32 @@ def createacct():
        # Check if user input are numbers
        if is_int(acc_num) == True:
            # Check if account number entered is new
-           if check_valid_acc(acc_num) == False:
-               # Check if the account number entered is 7-digits
-               if len(acc_num) == 7:
-                   while True:
-                       name = input("Please enter an account name with between 3 - 30 alphanumeric characters. \n")
-                       # Check if name entered is alphanumeric
-                       if is_alpha_num(name) == True:
-                           if len(name) >= 3 and len(name) < 31:
-                               print('Account Successfully Created')
-                               ## Appending transaction code into the temporary transaction summary file
-                               tsf_temp.append("NEW " + acc_num + " 000" + " 0000000 " + name + ' \n')
-                               return True
-                           else:
-                               print("**Error** Account name must be between 3-30 characters. \n")
-                       elif is_alpha_num(name) != True:
-                           print("**Error** Please enter in alphanumeric characters. \n ")
+           if acc_num[0] != '0':
+               # Verifies account number does not start with 0
+               if check_valid_acc(acc_num) == False:
+                   # Check if the account number entered is 7-digits
+                   if len(acc_num) == 7:
+                       while True:
+                           name = input("Please enter an account name with between 3 - 30 alphanumeric characters \n")
+                           # Check if name entered is alphanumeric
+                           if is_alpha_num(name) == True:
+                               if len(name) >= 3 and len(name) < 31:
+                                   print('Account Successfully Created')
+                                   ## Appending transaction code into the temporary transaction summary file
+                                   tsf_temp.append("NEW " + acc_num + " 000" + " 0000000 " + name + ' \n')
+                                   return True
+                               else:
+                                   print("**ERROR** Account name must be between 3-30 characters")
+                           elif is_alpha_num(name) != True:
+                               print("**ERROR** Please enter in alphanumeric characters")
+                   else:
+                        print("**ERROR** Please enter an account number with 7 digits")
                else:
-                    print("**Error** Please enter an account number with 7 digits. \n")
+                    print("**ERROR** Please enter a new account number")
            else:
-                print("**Error** Please enter a new account number. \n")
+               print("**ERROR** Your account number can not start with 0")
        else:
-           print("**Error** Enter in a 7-digit account number. \n")
+           print("**ERROR** Enter in a 7-digit account number")
 
 ## Identifies whether or not account type is atm or agent
 def get_Acc_Type():
