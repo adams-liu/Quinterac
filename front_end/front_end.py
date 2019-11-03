@@ -20,6 +20,7 @@ def temp_to_TSF(list):
 ## Check if input is fully numeric
 def is_int(input):
    ## Convert user input into ASCII values
+
    k = [ord(i) for i in input]
    for i in range(len(k)):
        ## Check if each character of user input is within range of ASCII Characters for integers
@@ -61,27 +62,56 @@ def transfer():
     while True:
         ## Ask for user input
         acc_num = input("Enter in 7-digit account number to transfer from: \n")
-        ## Check if first user input is of type string, 7 characters, and also a valid acocunt number
-        if isinstance(acc_num, str) and len(str(acc_num)) == 7 and check_valid_acc(acc_num):
-            while True:
-                acc_num2 = input("Enter in 7-digit account number to transfer to: \n")
-                ## Check if second user input is of type string, 7 characters, and also a valid account number
-                if isinstance(acc_num2, str) and len(str(acc_num2)) == 7 and check_valid_acc(acc_num):
-
-                    while True:
-                        deposit_value = input("Enter a 3 to 8 digit monetary value to transfer: \n")
-                        ## Check if the amount entered is of type string, and length is >= 3 and <= 8 digits
-                        if isinstance(deposit_value, str) and len(str(deposit_value)) >= 3 and len(str(deposit_value)) <= 8:
-                            print("Transferred " + deposit_value + " from account " + acc_num + " to account " + acc_num2 + ". \n")
-                            ## Appending transaction code into the temporary transaction summary file
-                            tsf_temp.append("XFR "+ acc_num + " " + deposit_value + " " + acc_num2 + " " + '*** \n')
-                            return True
-                        else:
-                            ## Error message if amount entered is outside of specified range
-                            print("Enter valid monetary amount to transfer please!")
+        if is_int(acc_num) == True:
+            ## If the first digit of the account does not start with zero, proceed to next line
+            if acc_num[0] != '0':
+                ## If the length of user input are 7 digits, proceed to next line
+                if len(str(acc_num)) == 7:
+                    ## If the user input matches an account number from the valid account list file, then proceed
+                    if check_valid_acc(acc_num) == True:
+                        while True:
+                            acc_num2 = input("Enter in 7-digit account number to transfer to: \n")
+                            ## Check if second user input is of type string, 7 characters, and also a valid account number
+                            if is_int(acc_num2) == True:
+                                ## If the first digit of the account does not start with zero, proceed to next line
+                                if acc_num2[0] != '0':
+                                    ## If the length of user input are 7 digits, proceed to next line
+                                    if len(str(acc_num2)) == 7:
+                                        ## If the user input matches an account number from the valid account list file, then proceed
+                                        if check_valid_acc(acc_num2) == True:
+                                            while True:
+                                                amount = input("Enter in a monetary amount between 3 and 8 digits: \n")
+                                                ## Check if the user input are numbers
+                                                if is_int(amount) == True:
+                                                    ## Check if the user input is below 9 digits
+                                                    if int(amount) <= 99999999 and int(amount) > 99:
+                                                        print("You have successfully transferred: $" + amount + " from account " + acc_num + " to account " + acc_num2)
+                                                        ## Appending transaction code into the temporary transaction summary file
+                                                        tsf_temp.append("XFR " + acc_num + " " + amount + " " + acc_num2 + " " + '*** \n')
+                                                        return True
+                                                    elif int(amount) <= 99:
+                                                        print("** ERROR **  Please enter an amount greater than 2 digits")
+                                                    else:
+                                                        print("** ERROR ** Please enter an amount below 9 digits")
+                                                else:
+                                                    print("** ERROR **  This is amount is not numerical")
+                                        else:
+                                            print("** ERROR **  You did not enter a valid account number")
+                                    else:
+                                        print("** ERROR **  Your account number was not 7-digits")
+                                else:
+                                    print("** ERROR **  Your account number can not start with 0")
+                            else:
+                                print("** ERROR **  Your account number must be numerical")
+                    else:
+                        print("** ERROR **  You did not enter a valid account number")
                 else:
-                    ## Error message if account number entered does not exist
-                    print("Enter valid account number please!")
+                    print("** ERROR **  Your account number was not 7-digits")
+            else:
+                print("** ERROR **  Your account number can not start with 0")
+        else:
+            print("** ERROR **  Your account number must be numerical")
+
 
 ## Deposit Transaction
 def deposit():
@@ -90,30 +120,36 @@ def deposit():
         acc_num = input("Please enter in 7-digit account number: \n")
         ## If the user input are numbers, then proceed to next line
         if is_int(acc_num) == True:
-            ## If the length of user input are 7 digits, proceed to next line
-            if len(str(acc_num)) == 7:
-                ## If the user input matches an account number from the valid account list file, then proceed
-                if check_valid_acc(acc_num) == True:
-                    while True:
-                        amount = input("Enter how much you want to deposit: \n")
-                        ## Check if the user input are numbers
-                        if is_int(amount) == True:
-                            ## Check if the user input is below 9 digits
-                            if int(amount) < 99999999 or int(amount) > 0:
-                                print("You have successfully deposited: $", amount, "into your bank account")
-                                ## Appending transaction code into the temporary transaction summary file
-                                tsf_temp.append("DEP " + acc_num + " " + amount + " 0000000 "+"*** \n")
-                                return True
+            ## If the first digit of the account does not start with zero, proceed to next line
+            if acc_num[0] != '0':
+                ## If the length of user input are 7 digits, proceed to next line
+                if len(str(acc_num)) == 7:
+                    ## If the user input matches an account number from the valid account list file, then proceed
+                    if check_valid_acc(acc_num) == True:
+                        while True:
+                            amount = input("Enter in a monetary amount between 3 and 8 digits: \n")
+                            ## Check if the user input are numbers
+                            if is_int(amount) == True:
+                                ## Check if the user input is below 9 digits
+                                if int(amount) <= 99999999 and int(amount) > 99:
+                                    print("You have successfully deposited: $", amount, "into your bank account")
+                                    ## Appending transaction code into the temporary transaction summary file
+                                    tsf_temp.append("DEP " + acc_num + " " + amount + " 0000000 "+"*** \n")
+                                    return True
+                                elif int(amount) <= 99:
+                                    print("** ERROR **  Please enter an amount greater than 2 digits")
+                                else:
+                                    print("** ERROR **  Please enter an amount below 9 digits")
                             else:
-                                print("**ERROR** You please enter a range between 0 - 99999999")
-                        else:
-                            print("**ERROR** This is amount is not numerical")
+                                print("** ERROR **  This is amount is not numerical")
+                    else:
+                        print("** ERROR **  You did not enter a valid account number")
                 else:
-                    print("**ERROR** You did not enter a valid account number")
+                    print("** ERROR **  Your account number was not 7-digits")
             else:
-                print("**ERROR** Your account number was not 7-digits")
+                print("** ERROR **  Your account number can not start with 0")
         else:
-            print("**ERROR** Your account number must be numerical")
+            print("** ERROR **  Your account number must be numerical")
 
 
 ## Withdraw Transaction
@@ -123,30 +159,36 @@ def withdraw():
         acc_num = input("Please enter in 7-digit account number: \n")
         ## If the user input are numbers, then proceed to next line
         if is_int(acc_num) == True:
-            ## If the length of user input are 7 digits, proceed to next line
-            if len(str(acc_num)) == 7:
-                ## If the user input matches an account number from the valid account list file, then proceed
-                if check_valid_acc(acc_num) == True:
-                    while True:
-                        amount = input("Enter how much you want to withdraw: \n")
-                        ## Check if the user input are numbers
-                        if is_int(amount) == True:
-                            ## Check if the user input is below 9 digits
-                            if int(amount) < 99999999 and int(amount) > 0:
-                                print("You have successfully withdrawed: $",amount, "into your bank account")
-                                ## Appending transaction code into the temporary transaction summary file
-                                tsf_temp.append("WDR " + acc_num + " " + amount + " 0000000 "+"*** \n")
-                                return True
+            ## If the first digit of the account does not start with zero, proceed to next line
+            if acc_num[0] != '0':
+                ## If the length of user input are 7 digits, proceed to next line
+                if len(str(acc_num)) == 7:
+                    ## If the user input matches an account number from the valid account list file, then proceed
+                    if check_valid_acc(acc_num) == True:
+                        while True:
+                            amount = input("Enter in a monetary amount between 3 and 8 digits: \n")
+                            ## Check if the user input are numbers
+                            if is_int(amount) == True:
+                                ## Check if the user input is below 9 digits
+                                if int(amount) <= 99999999 and int(amount) > 99:
+                                    print("You have successfully withdrew: $",amount, "into your bank account")
+                                    ## Appending transaction code into the temporary transaction summary file
+                                    tsf_temp.append("WDR " + acc_num + " " + amount + " 0000000 "+"*** \n")
+                                    return True
+                                elif int(amount) <= 99:
+                                    print("** ERROR **  Please enter an amount greater than 2 digits")
+                                else:
+                                    print("** ERROR **  Please enter an amount below 9 digits")
                             else:
-                                print("**ERROR** You please enter a range between 0 - 99999999")
-                        else:
-                            print("**ERROR** This is amount is not numerical")
+                                print("** ERROR **  This is amount is not numerical")
+                    else:
+                        print("** ERROR **  You did not enter a valid account number")
                 else:
-                    print("**ERROR** You did not enter a valid account number")
+                    print("** ERROR **  Your account number was not 7-digits")
             else:
-                print("**ERROR** Your account number was not 7-digits")
+                print("** ERROR **  Your account number can not start with 0")
         else:
-            print("**ERROR** Your account number must be numerical")
+            print("** ERROR **  Your account number must be numerical")
 
 ## Delete Account Transaction
 def deleteacct():
@@ -167,13 +209,13 @@ def deleteacct():
                            tsf_temp.append("DEL " + acc_num + " 000" + " 0000000 " + name + ' \n')
                            return True
                        else:
-                           print("**Error** Account name must be between 3-30 characters. \n")
+                           print("** ERROR **  Account name must be between 3-30 characters.")
                    elif is_alpha_num(name) != True:
-                       print("**Error** Please enter in alphanumeric characters. \n ")
+                       print("** ERROR **  Please enter in alphanumeric characters.")
            else:
-                print("**Error** Please enter a valid account number. \n")
+                print("** ERROR **  Please enter a valid account number.")
        else:
-           print("**Error** Enter in a 7-digit account number.")
+           print("** ERROR **  Enter in a 7-digit account number.")
 
 
 ## Create Account Transaction
@@ -197,15 +239,15 @@ def createacct():
                                tsf_temp.append("NEW " + acc_num + " 000" + " 0000000 " + name + ' \n')
                                return True
                            else:
-                               print("**Error** Account name must be between 3-30 characters. \n")
+                               print("** ERROR **  Account name must be between 3-30 characters.")
                        elif is_alpha_num(name) != True:
-                           print("**Error** Please enter in alphanumeric characters. \n ")
+                           print("** ERROR **  Please enter in alphanumeric characters.")
                else:
-                    print("**Error** Please enter an account number with 7 digits. \n")
+                    print("** ERROR **  Please enter an account number with 7 digits.")
            else:
-                print("**Error** Please enter a new account number. \n")
+                print("** ERROR **  Please enter a new account number.")
        else:
-           print("**Error** Enter in a 7-digit account number. \n")
+           print("** ERROR **  Enter in a 7-digit account number.")
 
 ## Identifies whether or not account type is atm or agent
 def get_Acc_Type():
@@ -218,7 +260,7 @@ def get_Acc_Type():
         if acc_type == "atm" or acc_type == "agent":
             return acc_type
         else: #user did not type atm or agent
-            print("** ERROR ** User did not input valid account type")
+            print("** ERROR **  User did not input valid account type")
 
 def main():
     ### 327 Main Starts Here ###
@@ -251,14 +293,14 @@ def main():
                             ## If the user type is agent, then proceed to transaction
                             if acc_type == "agent":
                                 createacct()
-                            else: ## Error when atm user tries to create account
-                                print("** Error ** You're not agent account type!")
+                            else: ## ERROR  when atm user tries to create account
+                                print("** ERROR **  You're not agent account type!")
                         if transaction_type == "deleteacct":
                             ## If the user type is agent, then proceed to transaction
                             if acc_type == "agent":
                                 deleteacct()
-                            else: ## Error when atm user tries to delete account
-                                print("** Error ** You're not agent account type!")
+                            else: ## ERROR  when atm user tries to delete account
+                                print("** ERROR **  You're not agent account type!")
                         if transaction_type == "logout":
                             print("Transaction Complete!")
                             ## Logout add EOS transaction to the end of the temporary transaction summary file
@@ -268,14 +310,14 @@ def main():
                             print("Transaction Complete!")
                             break
                     else: ## User did not enter a valid transaction
-                        print("** Error ** Not a valid transaction, please try again!")
+                        print("** ERROR **  Not a valid transaction, please try again!")
             ## Exit program when the user enters in exit
             elif login_valid == "exit":
 
                 sys.exit()
 
             else: # if user did not enter login
-                print("** ERROR ** Login not valid, please enter valid input")
+                print("** ERROR **  Login not valid, please enter valid input")
         except:
             break
 main()
