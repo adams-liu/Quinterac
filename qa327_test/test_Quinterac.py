@@ -1165,6 +1165,460 @@ def test_R16T1(capsys):
             'XFR 1000327 101 1000328 *** ',
             'EOS 0000000 000 0000000 ***'
         ])
+
+#### R17 Test cases ####
+def test_R17T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            'que3n$'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Enter in a 7-digit account number",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R17T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '0100329'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Your account number can not start with 0",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+
+def test_R17T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '100329'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Please enter an account number with 7 digits",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+
+def test_R17T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000327'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Please enter a new account number",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+
+def test_R17T5(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000329'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "Please enter an account name with between 3 - 30 alphanumeric characters "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R18 Test cases ####
+def test_R18T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000329',
+            'my'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Account name must be between 3-30 characters",
+            "Please enter an account name with between 3 - 30 alphanumeric characters "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+
+def test_R18T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000329',
+            'Acc123'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "Account Successfully Created",
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Create Account (createacct) | Delete Account (deleteacct) | Logout (logout)"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+
+def test_R18T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000329',
+            'myAccountNameIsWayTooLong123456789'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Account name must be between 3-30 characters",
+            "Please enter an account name with between 3 - 30 alphanumeric characters "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+
+def test_R18T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000329',
+            'qu3en$'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Please enter in alphanumeric characters",
+            "Please enter an account name with between 3 - 30 alphanumeric characters "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R19 Test cases ####
+def test_R19T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'createacct',
+            '1000329',
+            'Acc123',
+            'logout'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
+        ],
+        expected_output_transactions=[
+            'NEW 1000329 000 0000000 Acc123 ',
+            'EOS 0000000 000 0000000 ***'
+        ])
+
+#### R20 Test cases ####
+def test_R20T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            'qu3en$'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Enter in a 7-digit account number",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R20T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '0100329'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Your account number can not start with 0",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R20T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '100329'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Your account number must only have 7 digits",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R20T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000123'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Please enter a valid account number",
+            "Enter in 7-digit account number: "
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R20T5(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000329'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "Please enter an account name with between 3 - 30 alphanumeric characters"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R21 Test cases ####
+def test_R21T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000329',
+            'my'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Account name must be between 3-30 characters",
+            "Please enter an account name with between 3 - 30 alphanumeric characters"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R21T2(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000329',
+            'Acc123'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "Account Successfully Deleted",
+            "What would you like to do?: - Deposit (deposit) | Withdraw (withdraw) | Transfer (transfer) | Create Account (createacct) | Delete Account (deleteacct) | Logout (logout)"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R21T3(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000329',
+            'myAccountNameIsWayTooLong123456789'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Account name must be between 3-30 characters",
+            "Please enter an account name with between 3 - 30 alphanumeric characters"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+def test_R21T4(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000329',
+            'qu3en$'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "**ERROR** Please enter in alphanumeric characters",
+            "Please enter an account name with between 3 - 30 alphanumeric characters"
+        ],
+        expected_output_transactions=[
+
+        ])
+
+#### R22 Test cases ####
+def test_R22T1(capsys):
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login',
+            'agent',
+            'deleteacct',
+            '1000329',
+            'Acc123',
+            'logout'
+        ],
+        intput_valid_accounts=[
+            '1000327',
+            '1000328',
+            '1000329'
+        ],
+        expected_tail_of_terminal_output=[
+            "Transaction Complete!",
+            'Please enter "login" to login to Quinterac or "exit" to exit program:'
+        ],
+        expected_output_transactions=[
+            'DEL 1000329 000 0000000 Acc123 ',
+            'EOS 0000000 000 0000000 ***'
+        ])
+
 def helper(
         capsys,
         terminal_input,
