@@ -1,23 +1,4 @@
-### TEST CODE ###
 
-# Account_List = [1234567,7654321,1357246,6427531]
-# Account_Balance = {}
-# Account_Name = {"BobRoss123", }
-#
-# Accounts_Dict = {1234567: {'balance': 5000, 'name': 'bobross'},
-#                  7654321: {'balance': 5000, 'name': 'johndoe'}}
-#
-# #Method sorts code
-#
-# Accounts_Dict[7777777] = {'balance': 7, 'name': 'seven'}
-
-# Set all accounts to default balance of 5000
-# for i in range(len(Account_List)):
-#     Account_Balance[Account_List[i]] = 5000
-# print(Account_Balance)
-
-# print("Your account balance is:", Account_Balance)
-# print("Your account dictionary is:", Accounts_Dict)
 
 ### Program starts here ###
 # opens master account file
@@ -29,20 +10,27 @@ MAF_lines = MAF_in.read().splitlines()
 real_Dict = {}
 for row in MAF_lines:
     acc_num, balance, name = row.split()
-    real_Dict[acc_num] = {'balance': balance, 'name': name}
+
+    real_Dict[acc_num] = {'balance': int(balance), 'name': name}
 
 
-# print("real dictionary is,", real_Dict)
+print("real dictionary is,", real_Dict)
+print("testing" , real_Dict["1234567"])
 
 
 # transaction functions
-def deposit():
-    print("in deposit function")
+def deposit(acc1,amount):
+    real_Dict[acc1]["balance"] = real_Dict[acc1]["balance"] + amount
+    print("Final Amount" , real_Dict[acc1]["balance"])
     return 0
 
 
-def withdraw():
-    print("in withdraw function")
+def withdraw(acc1,amount):
+    if(real_Dict[acc1]["balance"] >= amount):
+        real_Dict[acc1]["balance"] = real_Dict[acc1]["balance"] - amount
+        print("Final Amount" , real_Dict[acc1]["balance"])
+    else:
+        print("FATAL ERROR: Withdraw insufficient funds")
     return 0
 
 
@@ -69,13 +57,15 @@ def end_sesh():
 # Transaction checks start here
 TSF_in = open("TSF.txt", "r+")
 TSF_lines = TSF_in.read().splitlines()
+
 for row in TSF_lines:
     ts_type, acc1, amount, acc2, acc_name = row.split()
-    print("my prints are", ts_type, acc1, amount, acc2, acc_num)
+    amount = int(amount)
+    print("my prints are", ts_type, acc1, amount, acc2, acc_name)
     if ts_type == 'DEP':
-        deposit()
+        deposit(acc1,amount)
     if ts_type == "WDR":
-        withdraw()
+        withdraw(acc1,amount)
     if ts_type == 'XFR':
         transfer()
     if ts_type == 'NEW':
@@ -85,7 +75,3 @@ for row in TSF_lines:
     if ts_type == 'EOS':
         end_sesh()
 
-
-def dog():
-    print("YOUR GAY")
-    # Your grammar is wrong ya clown
