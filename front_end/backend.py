@@ -31,7 +31,7 @@ for row in MAF_lines:
     acc_num, balance, name = row.split()
     real_Dict[acc_num] = {'balance': int(balance), 'name': name}
 
-# print("real dictionary is,", real_Dict)
+    #print("real dictionary is,", real_Dict)
 
 
 # transaction functions
@@ -54,13 +54,18 @@ def transfer(acc1, amount, acc2):
     return 0
 
 
-def create_acc():
-    print("go to create function")
+def create_acc(acc, acc_name):
+    print("create function")
+    real_Dict[acc] = {'balance': 500000, 'name': acc_name}
     return 0
 
 
-def delete_acc():
-    print("go to delete function")
+def delete_acc(acc, acc_name):
+    print("delete function")
+    if real_Dict[acc]['name'] != acc_name:
+        print("FATAL ERROR")
+    else:
+        del real_Dict[acc]
     return 0
 
 
@@ -86,7 +91,6 @@ TSF_lines = TSF_in.read().splitlines()
 for row in TSF_lines:
     ts_type, acc1, amount, acc2, acc_name = row.split()
     amount = int(amount)
-    print("my prints are", ts_type, acc1, amount, acc2, acc_num)
     if ts_type == 'DEP':
         deposit()
     if ts_type == "WDR":
@@ -94,13 +98,13 @@ for row in TSF_lines:
     if ts_type == 'XFR':
         transfer(acc1, amount, acc2)
     if ts_type == 'NEW':
-        create_acc()
+        create_acc(acc1, acc_name)
+        print(real_Dict)
     if ts_type == 'DEL':
-        delete_acc()
+        delete_acc(acc1, acc_name)
+        print(real_Dict)
     if ts_type == 'EOS':
         end_sesh()
 
 
-def dog():
-    print("YOUR GAY")
-    # Your grammar is wrong ya clown
+
