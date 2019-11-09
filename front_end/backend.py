@@ -55,15 +55,13 @@ def transfer(acc1, amount, acc2):
 
 
 def create_acc(acc, acc_name):
-    print("create function")
     real_Dict[acc] = {'balance': 500000, 'name': acc_name}
     return 0
 
 
 def delete_acc(acc, acc_name):
-    print("delete function")
     if real_Dict[acc]['name'] != acc_name:
-        print("FATAL ERROR")
+        print("FATAL ERROR: account name does not match")
     else:
         del real_Dict[acc]
     return 0
@@ -99,10 +97,8 @@ for row in TSF_lines:
         transfer(acc1, amount, acc2)
     if ts_type == 'NEW':
         create_acc(acc1, acc_name)
-        print(real_Dict)
     if ts_type == 'DEL':
         delete_acc(acc1, acc_name)
-        print(real_Dict)
     if ts_type == 'EOS':
         end_sesh()
 
