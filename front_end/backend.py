@@ -11,7 +11,11 @@ for row in MAF_lines:
 
 # transaction deposit
 def deposit(acc1, amount):
-    Master_Dict[acc1]["balance"] = Master_Dict[acc1]["balance"] + amount
+    if (Master_Dict[acc1]["balance"] + amount) > 99999999:
+        print("FATAL ERROR: deposit creates balance greater than $999,999.99")
+        return 0
+    else:
+        Master_Dict[acc1]["balance"] = Master_Dict[acc1]["balance"] + amount
     return 0
 
 # transaction withdraw
@@ -28,8 +32,12 @@ def transfer(acc1, amount, acc2):
         print("FATAL ERROR: transfer insufficient funds")
         return 0
     else:
-        Master_Dict[acc1]["balance"] += amount
-        Master_Dict[acc2]["balance"] -= amount
+        if (Master_Dict[acc1]["balance"] + amount) > 99999999:
+            print("FATAL ERROR: transfer creates balance greater than $999,999.99")
+            return 0
+        else:
+            Master_Dict[acc1]["balance"] += amount
+            Master_Dict[acc2]["balance"] -= amount
     return 0
 
 # transaction create account
@@ -85,9 +93,9 @@ for row in TSF_lines:
     amount = int(amount)
     # Branches off to transaction function type depending on first attribute
     if ts_type == 'DEP':
-        deposit(acc1,amount)
+        deposit(acc1, amount)
     if ts_type == "WDR":
-        withdraw(acc1,amount)
+        withdraw(acc1, amount)
     if ts_type == 'XFR':
         transfer(acc1, amount, acc2)
     if ts_type == 'NEW':
