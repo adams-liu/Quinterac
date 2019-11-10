@@ -3,50 +3,50 @@ MAF_in = open("new_MAF.txt", "r+")
 MAF_lines = MAF_in.read().splitlines()
 
 # creates and organizes dictionary for MAF
-real_Dict = {}
+Master_Dict = {}
 for row in MAF_lines:
     acc_num, balance, name = row.split()
-    real_Dict[acc_num] = {'balance': int(balance), 'name': name}
+    Master_Dict[acc_num] = {'balance': int(balance), 'name': name}
 
 
 # transaction deposit
-def deposit(acc1,amount):
-    real_Dict[acc1]["balance"] = real_Dict[acc1]["balance"] + amount
+def deposit(acc1, amount):
+    Master_Dict[acc1]["balance"] = Master_Dict[acc1]["balance"] + amount
     return 0
 
 # transaction withdraw
-def withdraw(acc1,amount):
-    if(real_Dict[acc1]["balance"] >= amount):
-        real_Dict[acc1]["balance"] = real_Dict[acc1]["balance"] - amount
+def withdraw(acc1, amount):
+    if(Master_Dict[acc1]["balance"] >= amount):
+        Master_Dict[acc1]["balance"] = Master_Dict[acc1]["balance"] - amount
     else:
         print("FATAL ERROR: withdraw insufficient funds")
     return 0
 
 # transaction transfer
 def transfer(acc1, amount, acc2):
-    if real_Dict[acc2]["balance"] < amount:
+    if Master_Dict[acc2]["balance"] < amount:
         print("FATAL ERROR: transfer insufficient funds")
         return 0
     else:
-        real_Dict[acc1]["balance"] += amount
-        real_Dict[acc2]["balance"] -= amount
+        Master_Dict[acc1]["balance"] += amount
+        Master_Dict[acc2]["balance"] -= amount
     return 0
 
 # transaction create account
 def create_acc(acc, acc_name):
-    real_Dict[acc] = {'balance': 500000, 'name': acc_name}
+    Master_Dict[acc] = {'balance': 500000, 'name': acc_name}
     return 0
 
 # transaction delete account
 def delete_acc(acc, acc_name):
-    if (real_Dict[acc]['name'] != acc_name) and (real_Dict[acc]['balance'] != 0):
+    if (Master_Dict[acc]['name'] != acc_name) and (Master_Dict[acc]['balance'] != 0):
         print("FATAL ERROR: account name does not match and account balance is not zero")
-    elif real_Dict[acc]['name'] != acc_name:
+    elif Master_Dict[acc]['name'] != acc_name:
         print("FATAL ERROR: account name does not match")
-    elif real_Dict[acc]['balance'] != 0:
+    elif Master_Dict[acc]['balance'] != 0:
         print("FATAL ERROR: account balance is not zero")
     else:
-        del real_Dict[acc]
+        del Master_Dict[acc]
     return 0
 
 # transaction end of session
@@ -56,9 +56,9 @@ def end_sesh():
     # creates new account list with new MAF
     acc_list_out = open("Account_List.txt", 'w')
     # sorts dictionary keys
-    for i in sorted(real_Dict.keys()):
+    for i in sorted(Master_Dict.keys()):
         # creates line for MAF
-        new_MAF.append(i + " " + str(real_Dict[i]["balance"]) + " " + real_Dict[i]["name"] + "\n")
+        new_MAF.append(i + " " + str(Master_Dict[i]["balance"]) + " " + Master_Dict[i]["name"] + "\n")
         # writes the (ordered) account number
         acc_list_out.write(i)
         acc_list_out.write("\n")
