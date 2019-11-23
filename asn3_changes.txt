@@ -1,7 +1,0 @@
-1. Encapsulate main
-2. Added break back to the logout. (Code did not break)
-3. front end line 268, changed two new lines to one 
-4. added transaction complete to the end
-5. For test_Quinterac.py change the index to out_lines[index-1] instead
-6. Try and Catch to cause a break
-7. remade the string error for tsf_temp
