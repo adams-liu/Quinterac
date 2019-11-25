@@ -4,6 +4,86 @@ The product that is designed is an Queen's Old-Fashioned Interactive Banking Sys
 
     - the Front end, a banking transaction acceptor for simple ATM-stel baking transactions
     - the Back Office, an overnight batch processor to maintain and update a master accounts file.
+# Directory Folders
+```
+│   .gitignore
+│   LICENSE
+│   Quinterac - Vowels Inc - Assn5.docx
+│   README.md
+│   requirements.txt
+│   tree.txt
+│   
+├───.github
+│   └───workflows
+│           pythonapp.yml
+│           
+├───.pytest_cache
+│   │   .gitignore
+│   │   CACHEDIR.TAG
+│   │   README.md
+│   │   
+│   └───v
+│       └───cache
+│               lastfailed
+│               nodeids
+│               stepwise
+│               
+├───qa327_app
+│   │   Account_List.txt
+│   │   backend.py
+│   │   front_end.py
+│   │   new_MAF.txt
+│   │   TSF.txt
+│   │   __init__.py
+│   │   __main__.py
+│   │   
+│   └───__pycache__
+│           app.cpython-37.pyc
+│           backend.cpython-37.pyc
+│           front_end.cpython-37.pyc
+│           __init__.cpython-37.pyc
+│           
+├───qa327_reports
+│       Quinterac - Vowels Inc - Assn1.pdf
+│       Quinterac - Vowels Inc - Assn2.pdf
+│       Quinterac - Vowels Inc - Assn3.pdf
+│       Quinterac - Vowels Inc - Assn4.pdf
+│       
+├───qa327_test
+│   │   Account_List.txt
+│   │   assn1_ requirements.xlsx
+│   │   assn3_error_spreadsheet.xlsx
+│   │   assn5_whitebox_tests.xlsx
+│   │   test_backend.py
+│   │   test_frontend.py
+│   │   test_new_MAF.txt
+│   │   test_new_TSF.txt
+│   │   __init__.py
+│   │   
+│   ├───.pytest_cache
+│   │   │   .gitignore
+│   │   │   CACHEDIR.TAG
+│   │   │   README.md
+│   │   │   
+│   │   └───v
+│   │       └───cache
+│   │               lastfailed
+│   │               nodeids
+│   │               stepwise
+│   │               
+│   └───__pycache__
+│           test_backend.cpython-37-pytest-5.2.2.pyc
+│           test_frontend.cpython-37-pytest-5.2.2.pyc
+│           test_main_approach2.cpython-37-pytest-5.2.2.pyc
+│           test_main_approach3.cpython-37-pytest-5.2.2.pyc
+│           test_Quinterac.cpython-37-pytest-5.2.0.pyc
+│           test_Quinterac.cpython-37-pytest-5.2.2.pyc
+│           __init__.cpython-37.pyc
+│           
+└───__pycache__
+        front_end.cpython-37.pyc
+        test_Quinterac.cpython-37-pytest-5.2.0.pyc
+```        
 
 # How to run the Quinterac app
 This is just to run the Quinterac app on it's own
