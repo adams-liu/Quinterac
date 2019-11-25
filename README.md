@@ -11,7 +11,6 @@ The product that is designed is an Queen's Old-Fashioned Interactive Banking Sys
 │   Quinterac - Vowels Inc - Assn5.docx
 │   README.md
 │   requirements.txt
-│   tree.txt
 │               
 ├───qa327_app
 │   │   Account_List.txt
