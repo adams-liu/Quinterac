@@ -1,14 +1,12 @@
 import sys
 from backend import *
 import time
+import os
 
 ## Initialize global variable for account type.
 acc_type = ""
 ## Initialize empty lists for temporary transaction summary file.
 tsf_temp = []
-
-# print("printing test back array", Account_List, "and array element 1 is", Account_List[1])
-# print("Account balances are", Account_Balance)
 
 ## Writes all contents of the temporary transaction summary file onto the actual transaction summary file saved as "TSF.txt"
 def temp_to_TSF(list):
@@ -286,7 +284,6 @@ def main():
         try:
             login_valid = input('Please enter "login" to login to Quinterac or "exit" to exit program:\n')
             if login_valid == "login":
-
                 ## Request the user's account type: either atm or agent
                 acc_type = get_Acc_Type()
                 while True: # Looping Transactions
@@ -318,18 +315,18 @@ def main():
                             else: ## ERROR  when atm user tries to delete account
                                 print("** ERROR **  You're not agent account type!")
                         if transaction_type == "logout":
-                            print("Transaction Complete!")
                             ## Logout add EOS transaction to the end of the temporary transaction summary file
                             tsf_temp.append("EOS " + '0000000 ' + "000 " + "0000000 " + "***\n")
                             ## add contents of the temporary transaction summary to the actual transaction summary file
                             temp_to_TSF(tsf_temp)
-                            dog()
                             print("Transaction Complete!")
-                            time.sleep(2.0)
                             break
+                            time.sleep(2.0)
                     else: ## User did not enter a valid transaction
                         print("** ERROR **  Not a valid transaction, please try again!")
-
+            ## Exit program when the user enters in exit
+            elif login_valid == "exit":
+                sys.exit()
             else: # if user did not enter login
                 print("** ERROR **  Login not valid, please enter valid input")
         except:

@@ -5,9 +5,9 @@ import io
 import sys
 
 #import front_end.front_end as front_end
-import front_end.front_end as front_end
-
+import qa327_app.front_end as front_end
 path = os.path.dirname(os.path.abspath(__file__))
+
 
 #### R6 Test Cases ####
 def test_R6T1(capsys):

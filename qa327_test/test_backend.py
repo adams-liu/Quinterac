@@ -1,5 +1,7 @@
+wbCounter1 = [0]*2
+wbCounter2 = [0]*1
 # opens master account file
-MAF_in = open("new_MAF.txt", "r+")
+MAF_in = open("test_new_MAF.txt", "r+")
 MAF_lines = MAF_in.read().splitlines()
 
 # creates and organizes dictionary for MAF
@@ -21,10 +23,12 @@ def deposit(acc1, amount):
 # transaction withdraw
 def withdraw(acc1, amount):
     if(Master_Dict[acc1]["balance"] < amount):
+        wbCounter1[0] += 1
         print("FATAL ERROR: withdraw insufficient funds")
     else:
+        wbCounter1[1] += 1
         Master_Dict[acc1]["balance"] = Master_Dict[acc1]["balance"] - amount
-    return 0
+
 
 # transaction transfer
 def transfer(acc1, amount, acc2):
@@ -43,6 +47,7 @@ def transfer(acc1, amount, acc2):
 # transaction create account
 def create_acc(acc, acc_name):
     Master_Dict[acc] = {'balance': 500000, 'name': acc_name}
+    wbCounter2[0] += 1
     return 0
 
 # transaction delete account
@@ -74,7 +79,7 @@ def end_sesh():
     acc_list_out.close()
 
     # creates new MAF file
-    MAF_out = open("new_MAF.txt", 'w')
+    MAF_out = open("test_new_MAF.txt", 'w')
     for i in new_MAF:
         ## Add all contents of MAF list to MAF file
         MAF_out.writelines(i)
@@ -84,7 +89,7 @@ def end_sesh():
 
 
 # Transaction checks start here
-TSF_in = open("TSF.txt", "r+")
+TSF_in = open("test_new_TSF.txt", "r+")
 TSF_lines = TSF_in.read().splitlines()
 
 # Goes through each transaction line by line
@@ -105,3 +110,5 @@ for row in TSF_lines:
     if ts_type == 'EOS':
         end_sesh()
 
+print("Counter Array 1: ", wbCounter1)
+print("Counter Array 2: ", wbCounter2)

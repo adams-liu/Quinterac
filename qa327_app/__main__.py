@@ -1,4 +1,4 @@
-from front_end.front_end import main
+from qa327_app.front_end import main
 
 
 if __name__ == "__main__":
