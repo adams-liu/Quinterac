@@ -12,21 +12,6 @@ The product that is designed is an Queen's Old-Fashioned Interactive Banking Sys
 │   README.md
 │   requirements.txt
 │   tree.txt
-│   
-├───.github
-│   └───workflows
-│           pythonapp.yml
-│           
-├───.pytest_cache
-│   │   .gitignore
-│   │   CACHEDIR.TAG
-│   │   README.md
-│   │   
-│   └───v
-│       └───cache
-│               lastfailed
-│               nodeids
-│               stepwise
 │               
 ├───qa327_app
 │   │   Account_List.txt
@@ -36,13 +21,7 @@ The product that is designed is an Queen's Old-Fashioned Interactive Banking Sys
 │   │   TSF.txt
 │   │   __init__.py
 │   │   __main__.py
-│   │   
-│   └───__pycache__
-│           app.cpython-37.pyc
-│           backend.cpython-37.pyc
-│           front_end.cpython-37.pyc
-│           __init__.cpython-37.pyc
-│           
+│
 ├───qa327_reports
 │       Quinterac - Vowels Inc - Assn1.pdf
 │       Quinterac - Vowels Inc - Assn2.pdf
@@ -59,30 +38,6 @@ The product that is designed is an Queen's Old-Fashioned Interactive Banking Sys
 │   │   test_new_MAF.txt
 │   │   test_new_TSF.txt
 │   │   __init__.py
-│   │   
-│   ├───.pytest_cache
-│   │   │   .gitignore
-│   │   │   CACHEDIR.TAG
-│   │   │   README.md
-│   │   │   
-│   │   └───v
-│   │       └───cache
-│   │               lastfailed
-│   │               nodeids
-│   │               stepwise
-│   │               
-│   └───__pycache__
-│           test_backend.cpython-37-pytest-5.2.2.pyc
-│           test_frontend.cpython-37-pytest-5.2.2.pyc
-│           test_main_approach2.cpython-37-pytest-5.2.2.pyc
-│           test_main_approach3.cpython-37-pytest-5.2.2.pyc
-│           test_Quinterac.cpython-37-pytest-5.2.0.pyc
-│           test_Quinterac.cpython-37-pytest-5.2.2.pyc
-│           __init__.cpython-37.pyc
-│           
-└───__pycache__
-        front_end.cpython-37.pyc
-        test_Quinterac.cpython-37-pytest-5.2.0.pyc
 ```        
 
 # How to run the Quinterac app
