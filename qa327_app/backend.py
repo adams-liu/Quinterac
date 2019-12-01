@@ -82,26 +82,26 @@ def end_sesh():
     MAF_out.close()
     return 0
 
-
+def main():
 # Transaction checks start here
-TSF_in = open("TSF.txt", "r+")
-TSF_lines = TSF_in.read().splitlines()
+    TSF_in = open("TSF.txt", "r+")
+    TSF_lines = TSF_in.read().splitlines()
 
 # Goes through each transaction line by line
-for row in TSF_lines:
-    ts_type, acc1, amount, acc2, acc_name = row.split()
-    amount = int(amount)
-    # Branches off to transaction function type depending on first attribute
-    if ts_type == 'DEP':
-        deposit(acc1, amount)
-    if ts_type == "WDR":
-        withdraw(acc1, amount)
-    if ts_type == 'XFR':
-        transfer(acc1, amount, acc2)
-    if ts_type == 'NEW':
-        create_acc(acc1, acc_name)
-    if ts_type == 'DEL':
-        delete_acc(acc1, acc_name)
-    if ts_type == 'EOS':
-        end_sesh()
+    for row in TSF_lines:
+        ts_type, acc1, amount, acc2, acc_name = row.split()
+        amount = int(amount)
+        # Branches off to transaction function type depending on first attribute
+        if ts_type == 'DEP':
+            deposit(acc1, amount)
+        if ts_type == "WDR":
+            withdraw(acc1, amount)
+        if ts_type == 'XFR':
+            transfer(acc1, amount, acc2)
+        if ts_type == 'NEW':
+            create_acc(acc1, acc_name)
+        if ts_type == 'DEL':
+            delete_acc(acc1, acc_name)
+        if ts_type == 'EOS':
+            end_sesh()
 

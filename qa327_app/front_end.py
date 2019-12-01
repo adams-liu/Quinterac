@@ -1,5 +1,5 @@
 import sys
-from backend import *
+# from backend import *
 import time
 import os
 
@@ -331,5 +331,5 @@ def main():
                 print("** ERROR **  Login not valid, please enter valid input")
         except:
             break
-main()
+# main()
 
