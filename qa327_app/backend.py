@@ -84,7 +84,7 @@ def end_sesh():
 
 def main():
 # Transaction checks start here
-    TSF_in = open("TSF.txt", "r+")
+    TSF_in = open("TSF.txt", "r")
     TSF_lines = TSF_in.read().splitlines()
 
 # Goes through each transaction line by line

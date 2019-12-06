@@ -275,6 +275,7 @@ def get_Acc_Type():
         else: #user did not type atm or agent
             print("** ERROR **  User did not input valid account type")
 
+
 def main():
     ### 327 Main Starts Here ###
     print("Welcome to the 327 Front End")
@@ -296,7 +297,6 @@ def main():
                     ## Check if the user input matches any of the valid transactions
                     if transaction_type == "deposit" or transaction_type == "withdraw" or transaction_type == "transfer" or transaction_type == "createacct" or transaction_type == "deleteacct" or transaction_type == "logout":
                         if transaction_type == "deposit":
-
                             deposit()
                         if transaction_type == "withdraw":
                             withdraw()
@@ -331,5 +331,5 @@ def main():
                 print("** ERROR **  Login not valid, please enter valid input")
         except:
             break
-# main()
+
 
