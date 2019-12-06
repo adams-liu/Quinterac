@@ -88,7 +88,7 @@ def transfer():
                                                     if int(amount) <= 99999999 and int(amount) > 99:
                                                         print("You have successfully transferred: $" + amount + " from account " + acc_num + " to account " + acc_num2)
                                                         ## Appending transaction code into the temporary transaction summary file
-                                                        tsf_temp.append("XFR " + acc_num + " " + amount + " " + acc_num2 + " " + '*** \n')
+                                                        tsf_temp.append("XFR " + acc_num2 + " " + amount + " " + acc_num + " " + '*** \n')
                                                         return True
                                                     elif int(amount) <= 99:
                                                         print("** ERROR **  Please enter an amount greater than 2 digits")
