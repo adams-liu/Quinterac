@@ -86,8 +86,6 @@ def main():
 # Transaction checks start here
     TSF_in = open("TSF.txt", "r")
     TSF_lines = TSF_in.read().splitlines()
-    for i in TSF_lines:
-        print(i)
 # Goes through each transaction line by line
     for row in TSF_lines:
         ts_type, acc1, amount, acc2, acc_name = row.split()
